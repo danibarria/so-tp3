@@ -1,0 +1,87 @@
+
+1.¿Qué es y qué funciones tiene el kernel de Linux?
+    El kernel es nivel mas bajo de software reemplazable el cual funciona como mediador entre el hardware y los procesos.
+    El kernel le permite a los procesos obtener informacion uno del otros
+    utilizando IPC, manejar drivers, brindar manejo de sistema de archivos y llamadas al sistema.
+    Las kernel es brinda interfaz a todas las aplicaciones que estan corriendo en modo usuario
+    con los dispositivos de hardware. 
+
+2.¿Cuál es la diferencia entre Linux y GNU/Linux?
+    Linux es una familia de distribuciones(como debian, redhat, ubuntu, etc...) construidas a partir del kernel de linux.
+    GNU/Linux son las distribuciones que ademas de estar construidas a partir del nucleo linux tienen las herramientas del 
+    equipo GNU.
+
+3.¿Qué es un Kernel Panic?
+    El Kernel Panic son las medidas de seguridad tomadas por el kernel para detectar errores fatales
+    en los cuales no es posible recuperse con seguridad o el sistema no puede continuar funcionando sin tener muchos
+    riesgos de perder datos 
+
+4.¿Cómo se consigue el código fuente del kernel? ¿Cuál es su estructura?
+    se consigue en https://github.com/torvalds/linux
+    su estructura es 
+    arch. Este directorio contiene archivos referentes a arquitecturas específicas. Dentro del directorio arch/ existen subdirectorios para diferentes tipos de arquitecturas como x86, ARM, MIPS o SPARC.
+    block. Contiene la implementación de algoritmos de planificación de E/S necesarios para el uso de dispositivos de almacenamiento por bloques
+    crypto. Contiene la implementación de operaciones de cifrado y la API criptológica que es usada por ejemplo por los dispositivos WiFi para implementar algoritmos de cifrado
+    Documentation. Este directorio contiene la descripción de muchos subsistemas así como información valiosa sobre el funcionamiento del Kernel
+    drivers. Este directorio contiene subdirectorios con los controladores de numerosos dispositivos separados por clases de dispositivo. Es el directorio con mayor contenido de largo
+    fs. Contiene la implementación de los diferentes sistemas de archivos como EXT3, EXT4, resiserfs, HFS, XFS, NTFS, FAT y otros
+    include. Los ficheros de cabecera del Kernel residen en este subdirectorio.
+    init. Contiene código de inicio y arranque
+    ipc. Contiene el código de soporte para la Comunicación entre Procesos (IPC) donde se implementan mecanismos como las colas de mensajes, los semáforos, y la memoria compartida
+    Kernel. Las porciones del Kernel indpendientes de la arquitectura se encuentran en este directorio
+    lib. Contiene el código que implementa rutinas de librería
+    mm. En este directorio se encuentra la implementación de los mecanismos de gestión de memoria
+    net. Contiene la implementación de los protocolos de red.
+    scripts. Scripts usados durante la construcción del Kernel
+    sound. El subsistema de audio de Linux se encuentra en este subdirectorio
+    usr. Contiene la implementación del sistema initramfs
+
+5.¿En qué consiste el proceso de compilación del kernel? ¿Por qué compilar un kernel?
+    El proceso de compilacion del kernel de linux consiste en pasar todo el codigo del kernel a un sistema operativo utilizable
+    con nuestras modificaciones o bien sin ellas. 
+    El kernel de linux es modificable, por eso compilar el kernel de linux nos permite agregar o quitar modulos del kernel que
+    deseemos, terminando con un sistema hecho a nuestra medida, con nuestros requerimientos.
+
+6.¿Qué es un patch file y para qué sirve?
+    Un patch file es resultado de utilizar el comando diff sobre un archivo actualizado, este contiene la lista de diferencias
+    (actualizaciones) que se le quieren agregar a un archivo. Luego utilizando el comando patch 
+    y pasando por argumentos el archivo original y el actualizado, podemos aplicar el patch.
+
+    Esto sirve para poder actualizar archivos, de una forma mas prolija. Un uso que puedo ver inmediatamente es, los sistemas
+    de control de versiones, los cuales pueden mostrar las diferencias de codigo agregado / eliminado.
+
+7.El código fuente del kernel es mantenido por miles de desarrolladores a lo largo del planeta.
+¿De qué forma se organizan para mantener las distintas versiones del kernel?
+
+    Se organizan con una comunidad que crea fork (una copia) del kernel de linux; le agrega nuevos 
+    features y soluciona bugs. 
+
+8.Explique el funcionamiento del sistema de control de versiones utilizado para mantener el
+kernel de Linux. Proponga un ejemplo práctico donde se vea su utilidad.
+
+    se utiliza Git y GitHub para llevar el control de versiones en el kernel de linux.
+    Git funciona como una programa controlador de versiones donde podemos desarrollar nuevas caracteristicas
+    o solucionar bugs de software, el mismo lleva el control de: fecha/hora, autor, mail, descripcion, lineas de 
+    codigo agregadas/eliminadas de un commit.
+    Github es un servicio de internet el cual permite tener proyectos en la web para codigo versionado
+    El mismo cuenta con diversas caracteristicas como la posibildiad de plantear tareas, revision de codigo,
+    trabajo colaborativo, y quizas una de las tareas mas importantes. Realizar "pull request", un "pull
+    request" es una manera de sugerirle al duenio del repositorio de corregir un error o agregar una funcionalidad.
+    A partir de estos dos mecanismos unidos se puede llevar a cabo la administracion de un proyecto tan grande
+    como el kernel de linux.
+
+9. ¿Qué se entiende por módulo en Linux? ¿En qué consiste? ¿Como se carga y descarga un
+módulo? Implemente un pequeño ejemplo de un módulo funcional, indicando los pasos
+necesarios para su creación.
+
+    Un modulo es piezas de codigo que pueden serr cargadas / descargadas en el kernel bajo demanda. 
+    Estos extienden la funcionalidad del kernel sin la necesidad de reiniciar el sistema.
+
+    se carga con el comando "insmod [nombre_modulo] [opciones_modulo]"querramos o que no utilicemos
+    se descarga con el comando "rmmod [-f][-s][-v][nombre_modulo]"
+
+    para el ejemplo
+    git clone https://github.com/ilnanny/TL-WN725N-TP-Link-Debian.git  #modulo de placa externa de wifi
+    cd TL-WN725N-TP-Link-Debian     #nos movemos al directorio
+    make all; su; make install      #compilamos y damos permisos de superusuario
+    insmod 8188eu.ko                #cargamos el modulo de la placa externa de wifi
