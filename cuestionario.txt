@@ -80,7 +80,7 @@ necesarios para su creación.
     se carga con el comando "insmod [nombre_modulo] [opciones_modulo]"querramos o que no utilicemos
     se descarga con el comando "rmmod [-f][-s][-v][nombre_modulo]"
 
-    para el ejemplo
+    el ejemplo de cargar un modulo
     git clone https://github.com/ilnanny/TL-WN725N-TP-Link-Debian.git  #modulo de placa externa de wifi
     cd TL-WN725N-TP-Link-Debian     #nos movemos al directorio
     make all; su; make install      #compilamos y damos permisos de superusuario
